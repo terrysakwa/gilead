@@ -54,5 +54,33 @@ class UsersTableSeeder extends Seeder
             'address'     => 'Mombasa',
             'user_type' => 3
         ]);
+
+        /**
+         * Create User Receptionist
+         * Referenced by type 2
+         */
+        User::create([
+            'name'      => 'Patient Terry',
+            'email'     => 'patient@gilead.com',
+            'password'  => bcrypt('123456'),
+            'gender'    => 1,
+            'phone_number' => '0712675123',
+            'address'     => 'Mombasa',
+            'user_type' => 3
+        ]);
+
+        /**
+         * Create User Receptionist
+         * Referenced by type 2
+         */
+        User::create([
+            'name'      => 'Patient Jemo',
+            'email'     => 'jemo@gilead.com',
+            'password'  => bcrypt('123456'),
+            'gender'    => 1,
+            'phone_number' => '0712675103',
+            'address'     => 'Mombasa',
+            'user_type' => 3
+        ]);
     }
 }
