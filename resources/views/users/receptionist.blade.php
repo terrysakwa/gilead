@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Add a Patient using the form below:</div>
+                <div class="panel-heading">Add a Patient records using the form below:</div>
 
                 <div class="panel-body">
                      <form class="form-horizontal" role="form" method="POST" action="{{ url('/register-patient') }}">
