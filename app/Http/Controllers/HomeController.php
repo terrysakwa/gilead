@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Repositories\DoctorRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SearchRequest;
+use App\Repositories\SearchRepository;
 
 class HomeController extends Controller
 {
@@ -23,26 +26,43 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DoctorRepository $doctorRepository)
     {
         /**
          * Return the dashboards if the user is logged in
          */
         if(Auth::check()){
             if(Auth::user()->user_type == 1){
-                return view('users.doctor');
+                $patients = $doctorRepository->getPatient();
+                return view('users.doctor', compact('patients'));
             }elseif(Auth::user()->user_type == 2){
                 return view('users.receptionist');
             }elseif(Auth::user()->user_type == 3){
-                return view('users.patient');
+                return view('users.patient.patient');
             }
         }
-
         /**
          * Return the welcome page if the user is not logged in
          */
         return view('welcome');
+    }
 
+    public function search(SearchRequest $searchRequest, SearchRepository $searchRepository, DoctorRepository $doctorRepository){
+
+        $query = $searchRequest->get('query');
+
+
+        if($query){
+
+            $patients = $searchRepository->search($query);
+
+            return view('users.doctor', compact('patients'));
+
+        }else{
+            $patients = $doctorRepository->getPatient();
+
+            return view('users.doctor', compact('patients'));
+        }
 
     }
 }

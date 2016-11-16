@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
+
+    /**
+     * User PatientRecord relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function patient_records(){
+
+        return $this->hasMany(PatientRecord::class);
+    }
 }

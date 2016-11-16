@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class RegisterPatientRequest extends Request
+class SavePatientRecordRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,11 @@ class RegisterPatientRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'gender'   => 'required',
-            'phone_number' => 'required',
-            'address'      => 'required'
+            'symptoms'     => 'required|max:1000|min:5',
+            'tests'        => 'required|max:100|min:5',
+            'test_results' => 'required|max:100|min:5',
+            'diagnosis'    => 'required|max:100|min:5',
+            'prescription' => 'required|max:1000|min:5'
         ];
     }
 }

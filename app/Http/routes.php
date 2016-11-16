@@ -21,4 +21,10 @@ Route::auth();
 
 Route::post('register-patient', 'RegisterPatientController@store');
 
+Route::get('search-patient', ['as' => 'search', 'uses' => 'HomeController@search']);
+
+Route::get('patient-records/{patient_id}', ['as' => 'patientRecords', 'uses' => 'PatientController@show']);
+
+Route::post('patient-records/{patient_id}', ['as' => 'savePatientRecord', 'uses' => 'PatientController@store']);
+
 //Route::get('/home', 'HomeController@index');
