@@ -8,7 +8,7 @@
                 {{--search form--}}
                 <form class="form-horizontal" method="get" action="{{ route('patientExists') }}">
                     <div class="input-group col-md-offset-3 col-md-6">
-                        <input type="text" class="search-query form-control" name="query" placeholder="Search to confirm if a patient exists" />
+                        <input type="text" class="search-query form-control" name="query" placeholder="Search to confirm if a patient exists in our system" />
                         <span class="input-group-btn">
                                     <button class="btn btn-danger" type="button">
                                             <i class="fa fa-search"></i>
