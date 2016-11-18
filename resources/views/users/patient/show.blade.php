@@ -128,17 +128,17 @@
                                 <div class="col-md-6">
                                     <div class="dropdown col-md-offset-9">
                                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            Dropdown
+                                            Actions
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="" class="btn btn-primary" data-toggle="modal" data-target="#editRecord-{{ $record->id }}">Edit</a></li>
+                                            <li><a href="" class="btn btn-primary" data-toggle="modal" data-target="#editRecord-{{ $record->id }}">Edit this record</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li>
                                                 <form action="{{ route('deleteRecord', [$record->id]) }}" method="post">
                                                     {{ csrf_field() }}
                                                     <button type="button" class="btn btn-danger col-md-12 deleteRecord">
-                                                        Delete
+                                                        Delete this record
                                                     </button>
                                                 </form>
                                             </li>

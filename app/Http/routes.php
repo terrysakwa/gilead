@@ -30,4 +30,7 @@ Route::post('patient-records/{patient_id}', ['as' => 'savePatientRecord', 'uses'
 Route::post('update-records/{patient_id}', ['as' => 'updatePatientRecord', 'uses' => 'PatientController@update']);
 
 Route::post('delete-records/{record_id}', ['as' => 'deleteRecord', 'uses' => 'PatientController@deleteRecord']);
+
+Route::post('change-request/{record_id}', ['as' => 'sendChangeRequest', 'uses' => 'PatientController@changeRequest']);
+
 //Route::get('/home', 'HomeController@index');

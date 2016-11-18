@@ -94,7 +94,7 @@ class PatientRepository
      */
     public function patientRecords(){
 
-        return Auth::user()->patient_records()->get();
+        return Auth::user()->patient_records();
     }
 
     /**
@@ -106,6 +106,20 @@ class PatientRepository
         $record = PatientRecord::findOrFail($record_id);
 
         $record->delete();
+    }
+
+    /***
+     * Save a change request for a certain record
+     * @param $record_id
+     * @param $request
+     */
+    public function changeRequest($record_id, $request){
+
+        $record = PatientRecord::findOrFail($record_id);
+
+        $record->change_request()->create([
+            'request' => $request->change_request
+        ]);
     }
 
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\SavePatientRecordRequest;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\ChangeRecordRequest;
 
 class PatientController extends Controller
 {
@@ -65,5 +66,21 @@ class PatientController extends Controller
         Session::flash('flash_message', 'Record #' . $record_id . ' was deleted successfully');
 
         return redirect()->back();
+    }
+
+    /**
+     * Send a change request for a record
+     * @param $record_id
+     * @param PatientRepository $patientRepository
+     * @param ChangeRecordRequest $changeRecordRequest
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changeRequest($record_id, PatientRepository $patientRepository, ChangeRecordRequest $changeRecordRequest){
+
+            $patientRepository->changeRequest($record_id, $changeRecordRequest);
+
+            Session::flash('flash_message', 'A change request was sent for record #' .$record_id);
+
+            return redirect()->back();
     }
 }
