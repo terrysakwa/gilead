@@ -49,11 +49,11 @@
                                 </div>
 
                                 <div class="col-md-offset-4">
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#changeRequestsModal">Click to view your change requests for this record</button>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#changeRequestsModal-{{ $record->id}}">Click to view your change requests for this record</button>
                                 </div>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="changeRequestsModal" tabindex="-1" role="dialog" aria-labelledby="changeRequestModal">
+                                <div class="modal fade" id="changeRequestsModal-{{ $record->id }}" tabindex="-1" role="dialog" aria-labelledby="changeRequestModal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -63,16 +63,14 @@
                                             <div class="modal-body">
 
                                                 @foreach($records->with('change_request')->latest()->get() as $request)
-                                                    @foreach($request->change_request()->latest()->get() as $change_request)
-                                                    <div class="well">
+                                                    @foreach($request->change_request()->where('patient_record_id', $record->id)->latest()->get() as $change_request)
+                                                        <div class="well">
 
-                                                       <p> Sent: {{ $change_request->created_at->diffForHumans() }}</p>
+                                                            <p> Sent: {{ $change_request->created_at->diffForHumans() }}</p>
 
+                                                            <p>Request description: {{ $change_request->request }}</p>
 
-
-                                                       <p>Request description: {{ $change_request->request }}</p>
-
-                                                    </div>
+                                                        </div>
                                                     @endforeach
                                                 @endforeach
 

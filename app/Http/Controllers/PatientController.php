@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\PatientRepository;
 use App\Repositories\SearchRepository;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,6 +12,7 @@ use App\Http\Requests\SavePatientRecordRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ChangeRecordRequest;
 use App\Http\Requests\SearchRequest;
+use PDF;
 
 class PatientController extends Controller
 {
@@ -107,6 +109,16 @@ class PatientController extends Controller
         Session::flash('flash_message', 'The patient with the email: <b><i>'. $searchRequest->get('query') . '</i></b> was not found in our system, maybe try adding them.' );
 
         return redirect()->back();
+    }
+
+    public function generateReport($patient_id, PatientRepository $patientRepository){
+
+        $records = $patientRepository->records($patient_id);
+
+        $patient = User::findOrFail($patient_id);
+
+        $pdf = PDF::loadView('report', compact('patient', 'records'));
+        return $pdf->stream();
 
     }
 }

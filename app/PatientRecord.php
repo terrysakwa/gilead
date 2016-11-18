@@ -29,5 +29,14 @@ class PatientRecord extends Model
         return $this->hasMany(ChangeRequest::class);
     }
 
+    /**
+     * PatientRecord User relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(){
+
+        return $this->belongsTo(User::class);
+    }
+
 
 }

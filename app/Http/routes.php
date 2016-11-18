@@ -36,4 +36,7 @@ Route::post('delete-records/{record_id}', ['as' => 'deleteRecord', 'uses' => 'Pa
 
 Route::post('change-request/{record_id}', ['as' => 'sendChangeRequest', 'uses' => 'PatientController@changeRequest']);
 
+Route::get('report/{patient_id}', ['as' => 'generateReport', 'uses' => 'PatientController@generateReport']);
+
+
 //Route::get('/home', 'HomeController@index');

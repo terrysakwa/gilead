@@ -10,7 +10,11 @@
             @endif
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Patient:  <b><i>{{ $patient->name }}</i></b> details <button type="button" class="btn btn-primary col-md-offset-3" data-toggle="modal" data-target="#addRecordModal">Add new record for <b><i>{{ $patient->name }}</i></b></button></div>
+                    <div class="panel-heading">Patient:  <b><i>{{ $patient->name }}</i></b> details <button type="button" class="btn btn-primary col-md-offset-2" data-toggle="modal" data-target="#addRecordModal">Add new record for <b><i>{{ $patient->name }}</i></b></button>
+                        @if($records->count())
+                        <a href="{{ route('generateReport', [$patient->id]) }}" class="btn btn-primary col-md-offset-1">Generate Patient <b><i>{{ $patient->name }}</i></b> Medical Report</a>
+                        @endif
+                    </div>
                     <!-- Modal -->
                     <div class="modal fade" id="addRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
@@ -117,7 +121,7 @@
 
 
                                     <h3>Record Details</h3>
-
+                                    <p>Record Id: {{$record->id}}</p>
                                     <p>Symptoms: {{$record->symptoms}}</p>
                                     <p>Tets: {{ $record->tests }}</p>
                                     <p>Tests Results: {{$record->test_results}}</p>
@@ -161,12 +165,10 @@
                                             <div class="modal-body">
 
                                                 @foreach($records->with('change_request')->latest()->get() as $request)
-                                                    @foreach($request->change_request()->latest()->get() as $change_request)
+                                                    @foreach($request->change_request()->where('patient_record_id', $record->id)->latest()->get() as $change_request)
                                                         <div class="well">
 
                                                             <p> Sent: {{ $change_request->created_at->diffForHumans() }}</p>
-
-
 
                                                             <p>Request description: {{ $change_request->request }}</p>
 

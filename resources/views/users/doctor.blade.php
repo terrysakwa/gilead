@@ -27,7 +27,7 @@
                         </div>
 
                             @foreach($patients as $patient)
-                            <div>
+                            <div class="patient-results">
                                 <div class="col-sm-3">
                                     <div class="card">
                                         <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
