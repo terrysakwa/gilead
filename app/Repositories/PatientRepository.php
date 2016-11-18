@@ -59,6 +59,25 @@ class PatientRepository
     }
 
     /**
+     * Update a patient record in the database
+     * @param $record_id
+     * @param $request
+     */
+    public function update($record_id, $request){
+
+       $record = PatientRecord::findOrFail($record_id);
+
+       $record->update([
+           'symptoms' => $request->symptoms,
+           'tests'    => $request->tests,
+           'test_results'     => $request->test_results,
+           'diagnosis' => $request->diagnosis,
+           'prescription' => $request->prescription
+       ]);
+
+    }
+
+    /**
      * Get patient records
      * @param $patient_id
      * @return mixed
@@ -67,6 +86,26 @@ class PatientRepository
     public function records($patient_id){
 
         return PatientRecord::where('user_id', $patient_id)->latest()->get();
+    }
+
+    /**
+     * Get a single patient records
+     * @return mixed
+     */
+    public function patientRecords(){
+
+        return Auth::user()->patient_records()->get();
+    }
+
+    /**
+     * Deletes a patient record from the database
+     * @param $record_id
+     */
+    public function deleteRecords($record_id){
+
+        $record = PatientRecord::findOrFail($record_id);
+
+        $record->delete();
     }
 
 }

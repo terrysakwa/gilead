@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Repositories\DoctorRepository;
+use App\Repositories\PatientRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SearchRequest;
@@ -26,7 +27,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DoctorRepository $doctorRepository)
+    public function index(DoctorRepository $doctorRepository, PatientRepository $patientRepository)
     {
         /**
          * Return the dashboards if the user is logged in
@@ -38,7 +39,10 @@ class HomeController extends Controller
             }elseif(Auth::user()->user_type == 2){
                 return view('users.receptionist');
             }elseif(Auth::user()->user_type == 3){
-                return view('users.patient.patient');
+
+                $records = $patientRepository->patientRecords();
+
+                return view('users.patient.patient', compact('records'));
             }
         }
         /**

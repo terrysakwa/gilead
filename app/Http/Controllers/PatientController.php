@@ -35,4 +35,35 @@ class PatientController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Update a particular patient record
+     * @param $record_id
+     * @param SavePatientRecordRequest $savePatientRecordRequest
+     * @param PatientRepository $patientRepository
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update($record_id, SavePatientRecordRequest $savePatientRecordRequest, PatientRepository $patientRepository){
+
+        $patientRepository->update($record_id, $savePatientRecordRequest);
+
+        Session::flash('flash_message', 'Record # '. $record_id . ' was updated successfully');
+
+        return redirect()->back();
+    }
+
+    /**
+     * Delete a patient
+     * @param $record_id
+     * @param PatientRepository $patientRepository
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteRecord($record_id, PatientRepository $patientRepository){
+
+        $patientRepository->deleteRecords($record_id);
+
+        Session::flash('flash_message', 'Record #' . $record_id . ' was deleted successfully');
+
+        return redirect()->back();
+    }
 }

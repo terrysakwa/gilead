@@ -27,4 +27,7 @@ Route::get('patient-records/{patient_id}', ['as' => 'patientRecords', 'uses' => 
 
 Route::post('patient-records/{patient_id}', ['as' => 'savePatientRecord', 'uses' => 'PatientController@store']);
 
+Route::post('update-records/{patient_id}', ['as' => 'updatePatientRecord', 'uses' => 'PatientController@update']);
+
+Route::post('delete-records/{record_id}', ['as' => 'deleteRecord', 'uses' => 'PatientController@deleteRecord']);
 //Route::get('/home', 'HomeController@index');

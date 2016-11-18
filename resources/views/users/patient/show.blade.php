@@ -132,21 +132,115 @@
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
+                                            <li><a href="" class="btn btn-primary" data-toggle="modal" data-target="#editRecord-{{ $record->id }}">Edit</a></li>
                                             <li role="separator" class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
+                                            <li>
+                                                <form action="{{ route('deleteRecord', [$record->id]) }}" method="post">
+                                                    {{ csrf_field() }}
+                                                    <button type="button" class="btn btn-danger col-md-12 deleteRecord">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
 
+                                <!-- Modal -->
+                                <div class="modal fade" id="editRecord-{{ $record->id }}" tabindex="-1" role="dialog" aria-labelledby="editRecord-{{ $record->id  }}">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="editRecord-{{ $record->id }}">Edit a record for: <b><i>{{ $patient->name }}</i></b> </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" role="form" method="POST" action="{{ route('updatePatientRecord', [$record->id]) }}">
+                                                    {{ csrf_field() }}
+
+                                                    <div class="form-group{{ $errors->has('symptoms') ? ' has-error' : '' }}">
+                                                        <label for="symptoms" class="col-md-4 control-label">Symptoms</label>
+
+                                                        <div class="col-md-6">
+                                                            <textarea class="form-control" rows="5" name="symptoms" id="symptoms">{{ $record->symptoms }}</textarea>
+                                                            @if ($errors->has('symptoms'))
+                                                                <span class="help-block">
+                                                        <strong>{{ $errors->first('symptoms') }}</strong>
+                                                    </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group{{ $errors->has('tests') ? ' has-error' : '' }}">
+                                                        <label for="tests" class="col-md-4 control-label">Laboratory Tests</label>
+
+                                                        <div class="col-md-6">
+                                                            <input id="tests" type="text" class="form-control" name="tests" value="{{ $record->tests }}">
+
+                                                            @if ($errors->has('tests'))
+                                                                <span class="help-block">
+                                                        <strong>{{ $errors->first('tests') }}</strong>
+                                                    </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group{{ $errors->has('test_results') ? ' has-error' : '' }}">
+                                                        <label for="test_results" class="col-md-4 control-label">Test Results</label>
+
+                                                        <div class="col-md-6">
+                                                            <input id="test_results" type="text" class="form-control" name="test_results" value="{{ $record->test_results }}">
+
+                                                            @if ($errors->has('test_results'))
+                                                                <span class="help-block">
+                                                        <strong>{{ $errors->first('test_results') }}</strong>
+                                                    </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group{{ $errors->has('diagnosis') ? ' has-error' : '' }}">
+                                                        <label for="diagnosis" class="col-md-4 control-label">Diagnosis</label>
+
+                                                        <div class="col-md-6">
+                                                            <input id="diagnosis" type="text" class="form-control" name="diagnosis" value="{{ $record->diagnosis }}">
+
+                                                            @if ($errors->has('diagnosis'))
+                                                                <span class="help-block">
+                                                        <strong>{{ $errors->first('diagnosis') }}</strong>
+                                                    </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group{{ $errors->has('prescription') ? ' has-error' : '' }}">
+                                                        <label for="prescription" class="col-md-4 control-label">Prescription</label>
+
+                                                        <div class="col-md-6">
+                                                            <textarea class="form-control" rows="5" name="prescription" id="prescription">{{ $record->prescription }}</textarea>
+                                                            @if ($errors->has('prescription'))
+                                                                <span class="help-block">
+                                                        <strong>{{ $errors->first('prescription') }}</strong>
+                                                    </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Update Record for {{ $patient->name }}</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                         @endforeach
                         @else
                             <p>Patient <b><i>{{ $patient->name }}</i></b>has no records!!</p>
                         @endif
-
 
                     </div>
                 </div>
