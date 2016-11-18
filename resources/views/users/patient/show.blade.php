@@ -108,7 +108,7 @@
                         <p>Address: {{ $patient->address }}</p>
 
                         @if($records->count())
-                        @foreach($records as $record)
+                        @foreach($records->get() as $record)
 
                             <div class="well col-md-12">
 
@@ -142,9 +142,43 @@
                                                     </button>
                                                 </form>
                                             </li>
+                                            <li role="separator" class="divider"></li>
+                                            <li>
+                                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#changeRequestsModal-{{$record->id}}">Change Requests</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="changeRequestsModal-{{$record->id}}" tabindex="-1" role="dialog" aria-labelledby="changeRequestModal">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Change requests for record # <b><i>{{ $record->id }}</i></b> </h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                @foreach($records->with('change_request')->latest()->get() as $request)
+                                                    @foreach($request->change_request()->latest()->get() as $change_request)
+                                                        <div class="well">
+
+                                                            <p> Sent: {{ $change_request->created_at->diffForHumans() }}</p>
+
+
+
+                                                            <p>Request description: {{ $change_request->request }}</p>
+
+                                                        </div>
+                                                    @endforeach
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                                 <!-- Modal -->

@@ -62,8 +62,8 @@
                                             </div>
                                             <div class="modal-body">
 
-                                                @foreach($records->with('change_request')->get() as $request)
-                                                    @foreach($request->change_request()->get() as $change_request)
+                                                @foreach($records->with('change_request')->latest()->get() as $request)
+                                                    @foreach($request->change_request()->latest()->get() as $change_request)
                                                     <div class="well">
 
                                                        <p> Sent: {{ $change_request->created_at->diffForHumans() }}</p>

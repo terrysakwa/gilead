@@ -85,7 +85,7 @@ class PatientRepository
 
     public function records($patient_id){
 
-        return PatientRecord::where('user_id', $patient_id)->latest()->get();
+        return PatientRecord::where('user_id', $patient_id)->latest();
     }
 
     /**
