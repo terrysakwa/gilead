@@ -15,7 +15,7 @@
                                 {{--search form--}}
                                 <form class="form-horizontal" method="get" action="{{ route('search') }}">
                                 <div class="input-group col-md-offset-3 col-md-6">
-                                    <input type="text" class="search-query form-control" name="query" placeholder="Search a patinet here" />
+                                    <input type="text" class="search-query form-control" name="query" placeholder="Search a patient here" />
                                     <span class="input-group-btn">
                                     <button class="btn btn-danger" type="button">
                                             <i class="fa fa-search"></i>

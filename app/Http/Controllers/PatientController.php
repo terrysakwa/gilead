@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\PatientRepository;
+use App\Repositories\SearchRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\SavePatientRecordRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ChangeRecordRequest;
+use App\Http\Requests\SearchRequest;
 
 class PatientController extends Controller
 {
@@ -82,5 +84,29 @@ class PatientController extends Controller
             Session::flash('flash_message', 'A change request was sent for record #' .$record_id);
 
             return redirect()->back();
+    }
+
+    /**
+     * Check if a patient exists
+     * @param SearchRequest $searchRequest
+     * @param SearchRepository $searchRepository
+     */
+    public function checkIfPatientExists(SearchRequest $searchRequest, SearchRepository $searchRepository){
+
+        $query = $searchRequest->get('query');
+
+        $search_result = $searchRepository->checkIfPatientExists($query);
+
+        if($search_result != null){
+
+            Session::flash('flash_message', 'Patient exists as  <b><i>Name: ' . $search_result->name . 'Phone Number: '. $search_result->phone_number .'</i></b>');
+
+            return redirect()->back();
+        }
+
+        Session::flash('flash_message', 'The patient with the email: <b><i>'. $searchRequest->get('query') . '</i></b> was not found in our system, maybe try adding them.' );
+
+        return redirect()->back();
+
     }
 }

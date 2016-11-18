@@ -3,7 +3,22 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <div id="custom-search-input">
+                {{--search form--}}
+                <form class="form-horizontal" method="get" action="{{ route('patientExists') }}">
+                    <div class="input-group col-md-offset-3 col-md-6">
+                        <input type="text" class="search-query form-control" name="query" placeholder="Search to confirm if a patient exists" />
+                        <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                            <i class="fa fa-search"></i>
+                                    </button>
+                                    </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-10 col-md-offset-1 receptionist-panel">
             <div class="panel panel-default">
                 <div class="panel-heading">Add a Patient using the form below:</div>
 
