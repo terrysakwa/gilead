@@ -19,8 +19,8 @@
             </div>
         </div>
         <div class="col-md-10 col-md-offset-1 receptionist-panel">
-            <div class="panel panel-default">
-                <div class="panel-heading">Add a Patient using the form below:</div>
+            <div class="panel">
+                <div class="panel-heading green-bg">Add a Patient using the form below:</div>
 
                 <div class="panel-body">
                      <form class="form-horizontal" role="form" method="POST" action="{{ url('/register-patient') }}">
@@ -132,9 +132,9 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <div class="col-md-6 col-md-offset-4">
+                                                <div class="col-md-6 col-md-offset-6">
                                                     <button type="submit" class="btn btn-primary">
-                                                        <i class="fa fa-btn fa-user"></i> Register
+                                                        <i class="fa fa-btn fa-user"></i> Register Patient
                                                     </button>
                                                 </div>
                                             </div>

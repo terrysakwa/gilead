@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css"
+          rel="stylesheet" type="text/css" />
 
     <!-- Styles -->
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
@@ -27,7 +29,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-static-top green-bg">
         <div class="container">
             <div class="navbar-header">
 
@@ -87,6 +89,14 @@
     <script src="{{ asset('js/main.js')}}"></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+    <script>
+        $.validate();
+
+    </script>
+
+
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

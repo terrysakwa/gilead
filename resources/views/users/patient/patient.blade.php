@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard for Patient</div>
+            <div class="panel">
+                <div class="panel-heading green-bg">Dashboard for Patient</div>
 
-                <div class="panel-body">
+                <div class="panel-body green-bg">
                     @if($records->count())
                         @foreach($records->get() as $record)
                             <div class="well col-md-12">
@@ -56,7 +56,7 @@
                                 <div class="modal fade" id="changeRequestsModal-{{ $record->id }}" tabindex="-1" role="dialog" aria-labelledby="changeRequestModal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <div class="modal-header">
+                                            <div class="modal-header green-bg">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 <h4 class="modal-title">Change requests for record # <b><i>{{ $record->id }}</i></b> </h4>
                                             </div>

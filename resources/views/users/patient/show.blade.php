@@ -9,8 +9,8 @@
                 </div>
             @endif
             <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Patient:  <b><i>{{ $patient->name }}</i></b> details <button type="button" class="btn btn-primary col-md-offset-2" data-toggle="modal" data-target="#addRecordModal">Add new record for <b><i>{{ $patient->name }}</i></b></button>
+                <div class="panel">
+                    <div class="panel-heading green-bg">Patient:  <b><i>{{ $patient->name }}</i></b> details <button type="button" class="btn btn-primary col-md-offset-2" data-toggle="modal" data-target="#addRecordModal">Add new record for <b><i>{{ $patient->name }}</i></b></button>
                         @if($records->count())
                         <a href="{{ route('generateReport', [$patient->id]) }}" class="btn btn-primary col-md-offset-1">Generate Patient <b><i>{{ $patient->name }}</i></b> Medical Report</a>
                         @endif
@@ -19,7 +19,7 @@
                     <div class="modal fade" id="addRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header green-bg">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title" id="myModalLabel">Add a new record for <b><i>{{ $patient->name }}</i></b> </h4>
                                 </div>
@@ -105,16 +105,19 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <p>Name: {{ $patient->name }}</p>
-                        <p>Email: {{ $patient->email }}</p>
-                        <p>Gender: @if($patient->gender == 1) Female @else Male @endif</p>
-                        <p>Phone Number: {{ $patient->phone_number }}</p>
-                        <p>Address: {{ $patient->address }}</p>
+                        <div class="col-md-3">
+                            <p><b>Name: {{ $patient->name }}</b></p>
+                            <p><b>Email: {{ $patient->email }}</b></p>
+                            <p><b>Gender: @if($patient->gender == 1) Female @else Male @endif</b></p>
+                            <p><b>Phone Number: {{ $patient->phone_number }}</b></p>
+                            <p><b>Address: {{ $patient->address }}</b></p>
+                        </div>
+
 
                         @if($records->count())
                         @foreach($records->get() as $record)
 
-                            <div class="well col-md-12">
+                            <div class="well green-bg col-md-12">
 
                                 <div class="col-md-6">
                                     Record Creation Date: {{ $record->created_at->diffForHumans()  }}
@@ -158,7 +161,7 @@
                                 <div class="modal fade" id="changeRequestsModal-{{$record->id}}" tabindex="-1" role="dialog" aria-labelledby="changeRequestModal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <div class="modal-header">
+                                            <div class="modal-header green-bg">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 <h4 class="modal-title">Change requests for record # <b><i>{{ $record->id }}</i></b> </h4>
                                             </div>
@@ -187,7 +190,7 @@
                                 <div class="modal fade" id="editRecord-{{ $record->id }}" tabindex="-1" role="dialog" aria-labelledby="editRecord-{{ $record->id  }}">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <div class="modal-header">
+                                            <div class="modal-header green-bg">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 <h4 class="modal-title" id="editRecord-{{ $record->id }}">Edit a record for: <b><i>{{ $patient->name }}</i></b> </h4>
                                             </div>
